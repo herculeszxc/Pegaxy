@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <input placeholder="Pega ID" id="pegaxyID" />
+    <button id="button">Submit</button>
+    
+    <script>
+    $(document).ready(function() {
+        $("button").click(function() {
+            var ID = document.getElementById('pegaxyID');
+            //console.log(ID.value);
+            $.ajax({
+                url: "https://api.pegaxy.io/pega/" + ID.value,
+                success: function(result) {
+                    pegaId = result.pega["id"];
+                    pegaName = result.pega["name"];
+                    pegaGender = result.pega["gender"];
+                    pegaBl = result.pega["bloodLine"];
+                    pegaEnergy = result.pega["energy"];
+                    pegaAddress = result.pega["address"];
+                    document.getElementById("button").addEventListener("click", displayData);
+                    function displayData() {
+                    document.getElementById("id").innerHTML = pegaId;
+                    document.getElementById("name").innerHTML = pegaName;
+                    document.getElementById("gender").innerHTML = pegaGender;
+                    document.getElementById("bl").innerHTML = pegaBl;
+                    document.getElementById("energy").innerHTML = pegaEnergy;
+                    document.getElementById("add").innerHTML = pegaAddress;
+                    }
+                } 
+            });      
+        });       
+    });
+    </script>
+    <p id="id"></p>
+    <p id="name"></p>
+    <p id="gender"></p>
+    <p id="bl"></p>
+    <p id="energy"></p>
+    <p id="add"></p>
+</body>
+
+</html>
